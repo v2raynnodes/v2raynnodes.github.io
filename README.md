@@ -3,7 +3,7 @@
 
 ## clash使用教程：
 
-<a href="https://www.freeclashnode.com/client/" target="_blank">科学上网详细教程</a>
+<a href="https://yfuye.com/kehuduanshiyongjiaocheng" target="_blank">科学上网详细教程</a>
 
 ## 订阅链接：
 
