@@ -1,3 +1,4 @@
 User-agent: *
 Disallow:
 Disallow: /bin/
+sitemap: https://a527127.sitemaphosting7.com/4632286/sitemap_4632286.xml
