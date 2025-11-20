@@ -1,5 +1,5 @@
 # 11月20日|22.4M/S，最新高速免费节点，Clash节点/SSR节点/V2ray节点/Shadowrocket节点/Singbox节点订阅链接地址，科学上网  更新时间 2025-11-20 08:28:20
-所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://v2raynnodes.github.io" target="_blank">点击跳转</a>
+所有免费节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://v2raynnodes.github.io" target="_blank">点击跳转</a>
 
 ## 客户端使用教程：
 
@@ -27,7 +27,7 @@
 
 - https://node.freeclashnode.com/uploads/2025/11/20251120.json
 
-## 更多Clash节点订阅 ：
+## 更多节点订阅 ：
 
 
 ### 高速机场推荐1【<a href="https://www.nfsq.us/#/register?code=CH8dmRTt" target="_blank">农夫山泉</a>】
