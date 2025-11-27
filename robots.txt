@@ -1,4 +1,8 @@
 User-agent: *
 Disallow:
 Disallow: /bin/
-sitemap: https://a527127.sitemaphosting7.com/4632286/sitemap_4632286.xml
+
+Sitemap: https://v2raynnodes.github.io/sitemap.xml
+Sitemap: https://a527127.sitemaphosting7.com/4632286/sitemap_4632286.xml
+Sitemap: https://v2raynnodes.github.io/v2rayclash/sitemap.xml
+Sitemap: https://v2raynnodes.github.io/clashnode/sitemap.xml
