@@ -9,19 +9,19 @@
 
 ### 免费Clash节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2025/11/0-20251130.yaml
-- https://node.freeclashnode.com/uploads/2025/11/1-20251130.yaml
-- https://node.freeclashnode.com/uploads/2025/11/2-20251130.yaml
-- https://node.freeclashnode.com/uploads/2025/11/3-20251130.yaml
-- https://node.freeclashnode.com/uploads/2025/11/4-20251130.yaml
+- https://node.freeclashnode.com/uploads/2025/12/0-20251201.yaml
+- https://node.freeclashnode.com/uploads/2025/12/1-20251201.yaml
+- https://node.freeclashnode.com/uploads/2025/12/2-20251201.yaml
+- https://node.freeclashnode.com/uploads/2025/12/3-20251201.yaml
+- https://node.freeclashnode.com/uploads/2025/12/4-20251201.yaml
 - 
 ### 免费V2ray节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2025/11/0-20251130.txt
-- https://node.freeclashnode.com/uploads/2025/11/1-20251130.txt
-- https://node.freeclashnode.com/uploads/2025/11/2-20251130.txt
-- https://node.freeclashnode.com/uploads/2025/11/3-20251130.txt
-- https://node.freeclashnode.com/uploads/2025/11/4-20251130.txt
+- https://node.freeclashnode.com/uploads/2025/12/0-20251201.txt
+- https://node.freeclashnode.com/uploads/2025/12/1-20251201.txt
+- https://node.freeclashnode.com/uploads/2025/12/2-20251201.txt
+- https://node.freeclashnode.com/uploads/2025/12/3-20251201.txt
+- https://node.freeclashnode.com/uploads/2025/12/4-20251201.txt
 
 ### 免费Sing-box节点订阅链接
 
