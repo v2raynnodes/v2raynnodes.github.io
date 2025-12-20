@@ -1,4 +1,4 @@
-# 12月19日|22.4M/S，最新高速免费节点，Clash节点/SSR节点/V2ray节点/Shadowrocket节点/Singbox节点订阅链接地址，科学上网  更新时间 2025-12-19 08:28:20
+# 12月20日|22.4M/S，最新高速免费节点，Clash节点/SSR节点/V2ray节点/Shadowrocket节点/Singbox节点订阅链接地址，科学上网  更新时间 2025-12-20 08:28:20
 所有免费节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://v2raynnodes.github.io" target="_blank">点击跳转</a>
 
 ## 客户端使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2025/12/0-20251219.yaml
-- https://node.freeclashnode.com/uploads/2025/12/1-20251219.yaml
-- https://node.freeclashnode.com/uploads/2025/12/2-20251219.yaml
-- https://node.freeclashnode.com/uploads/2025/12/3-20251219.yaml
-- https://node.freeclashnode.com/uploads/2025/12/4-20251219.yaml
+- https://node.freeclashnode.com/uploads/2025/12/0-20251220.yaml
+- https://node.freeclashnode.com/uploads/2025/12/1-20251220.yaml
+- https://node.freeclashnode.com/uploads/2025/12/2-20251220.yaml
+- https://node.freeclashnode.com/uploads/2025/12/3-20251220.yaml
+- https://node.freeclashnode.com/uploads/2025/12/4-20251220.yaml
 - 
 ### 免费V2ray节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2025/12/0-20251219.txt
-- https://node.freeclashnode.com/uploads/2025/12/1-20251219.txt
-- https://node.freeclashnode.com/uploads/2025/12/2-20251219.txt
-- https://node.freeclashnode.com/uploads/2025/12/3-20251219.txt
-- https://node.freeclashnode.com/uploads/2025/12/4-20251219.txt
+- https://node.freeclashnode.com/uploads/2025/12/0-20251220.txt
+- https://node.freeclashnode.com/uploads/2025/12/1-20251220.txt
+- https://node.freeclashnode.com/uploads/2025/12/2-20251220.txt
+- https://node.freeclashnode.com/uploads/2025/12/3-20251220.txt
+- https://node.freeclashnode.com/uploads/2025/12/4-20251220.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2025/12/20251219.json
+- https://node.freeclashnode.com/uploads/2025/12/20251220.json
 
 ## 更多节点订阅 ：
 
