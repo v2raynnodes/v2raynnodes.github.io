@@ -35,7 +35,7 @@
 
 
 
-### 高速机场推荐2【<a href="https://11008866.xyz/#/register?code=jWv0CnPO" target="_blank">星辰VPN</a>】
+### 高速机场推荐2【<a href="https://c.kilxs.cn/#/register?code=jWv0CnPO" target="_blank">星辰VPN</a>】
 
 - 无视高峰，全天4K秒开，机房遍布全球，IP多多益善，99%流媒体解锁，油管、葫芦、奈菲，小电影丝般顺滑！ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选择，现在注册即可免费试用！
 - 网站注册地址：【<a href="https://11008866.xyz/#/register?code=jWv0CnPO" target="_blank">星辰VPN（点击注册）</a>】
