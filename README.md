@@ -1,4 +1,4 @@
-# 7月27日|12.2M/S，最新高速免费节点，Clash节点/SSR节点/V2ray节点/Shadowrocket节点/Singbox节点订阅链接地址，科学上网  更新时间 2026-7-27 08:28:20
+# 7月28日|12.2M/S，最新高速免费节点，Clash节点/SSR节点/V2ray节点/Shadowrocket节点/Singbox节点订阅链接地址，科学上网  更新时间 2026-7-28 08:28:20
 所有免费节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://v2raynnodes.github.io" target="_blank">点击跳转</a>
 
 ## 客户端使用教程：
@@ -9,16 +9,16 @@
 
 ### 免费Clash节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2026/07/0-20260727.yaml
+- https://node.freeclashnode.com/uploads/2026/07/0-20260728.yaml
 
  
 ### 免费V2ray节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2026/07/0-20260727.txt
+- https://node.freeclashnode.com/uploads/2026/07/0-20260728.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2026/07/20260727.json
+- https://node.freeclashnode.com/uploads/2026/07/20260728.json
 
 ## 更多节点订阅 ：
 
