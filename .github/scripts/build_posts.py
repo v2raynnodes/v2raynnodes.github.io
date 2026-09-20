@@ -124,7 +124,7 @@ if os.path.exists(base_index_path):
     with open(base_index_path, 'r', encoding='utf-8', errors='ignore') as f:
         template_html = f.read()
 
-# 基础兜底模板（当 index 文件完全不存在时自动生成一个）
+# 基础兜底模板
 if 'xcblog-blog-list' not in template_html:
     template_html = '''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -145,7 +145,7 @@ if 'xcblog-blog-list' not in template_html:
 </body>
 </html>'''
 
-# 增强型：精准定位模板中的卡片区域并清除旧内容
+# 增强型模板解析：优先匹配注释，其次匹配容器，最后智能插入到 body 内部
 if '<!-- XCBLOG_CARDS_START -->' in template_html:
     clean_template = re.sub(
         r'<!--\s*XCBLOG_CARDS_START\s*-->.*?<!--\s*XCBLOG_PAGINATION_END\s*-->', 
@@ -154,13 +154,16 @@ if '<!-- XCBLOG_CARDS_START -->' in template_html:
         flags=re.DOTALL | re.IGNORECASE
     )
 else:
-    list_pattern = re.compile(r'(<div[^>]*class=["\'][^"\']*xcblog-blog-list[^"\']*["\'][^>]*>)', re.IGNORECASE)
+    list_pattern = re.compile(r'(<[^>]+xcblog-blog-list[^>]*>)', re.IGNORECASE)
     if list_pattern.search(template_html):
         clean_template = list_pattern.sub(r'\1\n%%PLACEHOLDER%%', template_html, count=1)
     else:
-        clean_template = template_html + '\n<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>'
+        if '</body>' in template_html:
+            clean_template = template_html.replace('</body>', '<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>\n</body>')
+        else:
+            clean_template = template_html + '\n<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>'
 
-# 循环生成子目录下的所有分页文件 (index.htm, index1.htm, index2.htm ...)
+# 循环生成子目录下的所有分页文件
 for page_idx in range(total_pages):
     start_idx = page_idx * page_size
     end_idx = start_idx + page_size
@@ -235,11 +238,14 @@ if root_index_path:
             flags=re.DOTALL | re.IGNORECASE
         )
     else:
-        list_pattern = re.compile(r'(<div[^>]*class=["\'][^"\']*xcblog-blog-list[^"\']*["\'][^>]*>)', re.IGNORECASE)
+        list_pattern = re.compile(r'(<[^>]+xcblog-blog-list[^>]*>)', re.IGNORECASE)
         if list_pattern.search(root_template):
             clean_root_template = list_pattern.sub(r'\1\n%%PLACEHOLDER%%', root_template, count=1)
         else:
-            clean_root_template = root_template + '\n<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>'
+            if '</body>' in root_template:
+                clean_root_template = root_template.replace('</body>', '<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>\n</body>')
+            else:
+                clean_root_template = root_template + '\n<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>'
 
     # 根目录通常只展示第 1 页的最新 10 个卡片
     root_page_posts = all_posts[:page_size]
@@ -247,7 +253,6 @@ if root_index_path:
     for dt, bname in root_page_posts:
         y_str, mo_str, d_str = str(dt.year), str(dt.month), str(dt.day)
         card_date_display = f"{mo_str}月{d_str}日"
-        # 路径调整为以 free-nodes/ 开头
         sub_bname = f"free-nodes/{bname}" if not bname.startswith("free-nodes/") else bname
         
         card_html = f'''            <div class="row content item xcblog-blog-item" data-date="{y_str}-{mo_str}-{d_str}">
