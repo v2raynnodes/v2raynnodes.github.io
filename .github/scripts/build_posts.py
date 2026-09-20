@@ -26,7 +26,7 @@ target_compact_date = f"{today_year}{today_month_zero}{today_day_zero}"
 new_basename = ""
 current_random_speed = f"{round(random.uniform(10.0, 35.0), 1)}M/S"
 
-# ----------------- 1. 处理 free-nodes 目录下的最新文章 (.htm) -----------------
+# ----------------- 1. 处理 free-nodes 目录下的最新文章 (.htm/.html/.md) -----------------
 all_files = glob.glob(os.path.join(posts_dir, "*.htm")) + glob.glob(os.path.join(posts_dir, "*.html")) + glob.glob(os.path.join(posts_dir, "*.md"))
 
 valid_files = []
@@ -124,111 +124,43 @@ if os.path.exists(base_index_path):
     with open(base_index_path, 'r', encoding='utf-8', errors='ignore') as f:
         template_html = f.read()
 
+# 基础兜底模板（当 index 文件完全不存在时自动生成一个）
 if 'xcblog-blog-list' not in template_html:
-    template_html = '''
+    template_html = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>免费节点平台</title></head>
 <body data-page="index">
-    <!--header-->
-    <header id="site-header" class="fixed-top">
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg stroke">
-                <a class="navbar-brand d-flex align-items-center" href="/">
-                                <h1>
-                    V2ray Node 免费节点平台                </h1>
-                                </a>
-
-                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav ml-lg-auto">
-                                                <li class="nav-item">
-                            <a class="nav-link" href="/">首页</a>
-                        </li>
-                                                <li class="nav-item">
-                            <a class="nav-link" href="/free-nodes/">免费节点</a>
-                        </li>
-                                                <li class="nav-item">
-                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
-                        </li>
-                                                <li class="nav-item">
-                            <a class="nav-link" href="/client.htm">客户端</a>
-                        </li>
-                                                <li class="nav-item">
-                            <a class="nav-link" href="/news/">新闻资讯</a>
-                        </li>
-                                            </ul>
-                </div>
-                <!-- toggle switch for light and dark theme -->
-                <div class="cont-ser-position">
-                    <nav class="navigation">
-                        <div class="theme-switch-wrapper">
-                            <label class="theme-switch" for="checkbox">
-                                <input type="checkbox" id="checkbox">
-                                <div class="mode-container">
-                                    <i class="gg-sun"></i>
-                                    <i class="gg-moon"></i>
-                                </div>
-                            </label>
-                        </div>
-                    </nav>
-                </div>
-                <!-- //toggle switch for light and dark theme -->
-            </nav>
-        </div>
-    </header>
-    <!--//header-->
-    <!-- banner section -->
-    <section class="w3l-main-slider" id="home">
-        <div class="companies20-content">
-            <div class="owl-one owl-carousel owl-theme">
-                <div class="item">
-                    <li>
-                        <div class="slider-info banner-view">
-                            <div class="banner-info">
-                                <div class="container">
-                                    <div class="banner-info-bg">
-                                        <h2>安全高效的V2ray节点订阅</h2>
-                                        <p>
-                                            提供稳定、可用的V2ray节点，附带详细节点信息及快速使用教程，满足用户日常办公、学习及科学上网需求。                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- //banner section -->
-    <!-- courses section -->
     <div class="w3l-grids-block-5 py-5">
         <div class="container py-md-5 py-4">
             <div class="row">
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
-                            <h3 class="title-main">最近更新文章</h3>
-                        </div>
                         <div class="row xcblog-blog-list">
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-</body>'''
+    </div>
+</body>
+</html>'''
 
-
+# 增强型：精准定位模板中的卡片区域并清除旧内容
 if '<!-- XCBLOG_CARDS_START -->' in template_html:
-    clean_template = re.sub(r'<!-- XCBLOG_CARDS_START -->.*?<!-- XCBLOG_PAGINATION_END -->', '%%PLACEHOLDER%%', template_html, flags=re.DOTALL)
+    clean_template = re.sub(
+        r'<!--\s*XCBLOG_CARDS_START\s*-->.*?<!--\s*XCBLOG_PAGINATION_END\s*-->', 
+        '%%PLACEHOLDER%%', 
+        template_html, 
+        flags=re.DOTALL | re.IGNORECASE
+    )
 else:
-    if '<div class="xcblog-blog-list">' in template_html:
-        clean_template = template_html.replace('<div class="xcblog-blog-list">', '<div class="xcblog-blog-list">\n%%PLACEHOLDER%%')
+    list_pattern = re.compile(r'(<div[^>]*class=["\'][^"\']*xcblog-blog-list[^"\']*["\'][^>]*>)', re.IGNORECASE)
+    if list_pattern.search(template_html):
+        clean_template = list_pattern.sub(r'\1\n%%PLACEHOLDER%%', template_html, count=1)
     else:
-        clean_template = template_html + '\n%%PLACEHOLDER%%'
+        clean_template = template_html + '\n<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>'
 
+# 循环生成子目录下的所有分页文件 (index.htm, index1.htm, index2.htm ...)
 for page_idx in range(total_pages):
     start_idx = page_idx * page_size
     end_idx = start_idx + page_size
@@ -239,19 +171,19 @@ for page_idx in range(total_pages):
         y_str, mo_str, d_str = str(dt.year), str(dt.month), str(dt.day)
         card_date_display = f"{mo_str}月{d_str}日"
         
-        card_html = f'''                            <div class="row content item xcblog-blog-item" data-date="{y_str}-{mo_str}-{d_str}">
-                                <div class="col-md-3">
-                                    <a href="{bname}" class="xcblog-blog-url">
-                                        <img src="/uploads/20241103/Gemini_Generated_Image_i0kmrqi0kmrqi0km.jpg" alt="{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接" style="width:100%;">
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <a href="{bname}" class="xcblog-blog-url">
-                                    <h3>{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接地址</h3>
-                                    </a>
-                                    <p>这一次的节点更新覆盖了新加坡、加拿大、香港、欧洲、美国、日本、韩国等地区,最高速度可达{current_random_speed}。只需复制下方的Clash/v2ray订阅链接,在客户端添加后即可正常使用。</p>
-                                </div>
-                            </div>\n'''
+        card_html = f'''            <div class="row content item xcblog-blog-item" data-date="{y_str}-{mo_str}-{d_str}">
+                <div class="col-md-3">
+                    <a href="{bname}" class="xcblog-blog-url">
+                        <img src="/uploads/20241103/Gemini_Generated_Image_i0kmrqi0kmrqi0km.jpg" alt="{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接" style="width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <a href="{bname}" class="xcblog-blog-url">
+                    <h3>{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接地址</h3>
+                    </a>
+                    <p>这一次的节点更新覆盖了新加坡、加拿大、香港、欧洲、美国、日本、韩国等地区,最高速度可达{current_random_speed}。只需复制下方的Clash/v2ray订阅链接,在客户端添加后即可正常使用。</p>
+                </div>
+            </div>\n'''
         cards_html += card_html
     cards_html += "<!-- XCBLOG_CARDS_END -->\n"
 
@@ -274,11 +206,7 @@ for page_idx in range(total_pages):
     full_content_block = cards_html + pagination_html
     page_content = clean_template.replace('%%PLACEHOLDER%%', full_content_block)
 
-    if page_idx == 0:
-        current_filename = "index.htm"
-    else:
-        current_filename = f"index{page_idx}.htm"
-
+    current_filename = "index.htm" if page_idx == 0 else f"index{page_idx}.htm"
     page_file_path = os.path.join(posts_dir, current_filename)
     with open(page_file_path, 'w', encoding='utf-8') as f:
         f.write(page_content)
@@ -300,14 +228,20 @@ if root_index_path:
 
     # 清理根目录首页旧的卡片和分页
     if '<!-- XCBLOG_CARDS_START -->' in root_template:
-        clean_root_template = re.sub(r'<!-- XCBLOG_CARDS_START -->.*?<!-- XCBLOG_PAGINATION_END -->', '%%PLACEHOLDER%%', root_template, flags=re.DOTALL)
+        clean_root_template = re.sub(
+            r'<!--\s*XCBLOG_CARDS_START\s*-->.*?<!--\s*XCBLOG_PAGINATION_END\s*-->', 
+            '%%PLACEHOLDER%%', 
+            root_template, 
+            flags=re.DOTALL | re.IGNORECASE
+        )
     else:
-        if '<div class="xcblog-blog-list">' in root_template:
-            clean_root_template = root_template.replace('<div class="xcblog-blog-list">', '<div class="xcblog-blog-list">\n%%PLACEHOLDER%%')
+        list_pattern = re.compile(r'(<div[^>]*class=["\'][^"\']*xcblog-blog-list[^"\']*["\'][^>]*>)', re.IGNORECASE)
+        if list_pattern.search(root_template):
+            clean_root_template = list_pattern.sub(r'\1\n%%PLACEHOLDER%%', root_template, count=1)
         else:
-            clean_root_template = root_template + '\n%%PLACEHOLDER%%'
+            clean_root_template = root_template + '\n<div class="xcblog-blog-list">\n%%PLACEHOLDER%%\n</div>'
 
-    # 根目录通常也只展示第 1 页的最新 10 个卡片
+    # 根目录通常只展示第 1 页的最新 10 个卡片
     root_page_posts = all_posts[:page_size]
     root_cards_html = "<!-- XCBLOG_CARDS_START -->\n"
     for dt, bname in root_page_posts:
@@ -316,19 +250,19 @@ if root_index_path:
         # 路径调整为以 free-nodes/ 开头
         sub_bname = f"free-nodes/{bname}" if not bname.startswith("free-nodes/") else bname
         
-        card_html = f'''                            <div class="row content item xcblog-blog-item" data-date="{y_str}-{mo_str}-{d_str}">
-                                <div class="col-md-3">
-                                    <a href="{sub_bname}" class="xcblog-blog-url">
-                                        <img src="/uploads/20241103/Gemini_Generated_Image_i0kmrqi0kmrqi0km.jpg" alt="{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接" style="width:100%;">
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <a href="{sub_bname}" class="xcblog-blog-url">
-                                    <h3>{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接地址</h3>
-                                    </a>
-                                    <p>这一次的节点更新覆盖了新加坡、加拿大、香港、欧洲、美国、日本、韩国等地区,最高速度可达{current_random_speed}。只需复制下方的Clash/v2ray订阅链接,在客户端添加后即可正常使用。</p>
-                                </div>
-                            </div>\n'''
+        card_html = f'''            <div class="row content item xcblog-blog-item" data-date="{y_str}-{mo_str}-{d_str}">
+                <div class="col-md-3">
+                    <a href="{sub_bname}" class="xcblog-blog-url">
+                        <img src="/uploads/20241103/Gemini_Generated_Image_i0kmrqi0kmrqi0km.jpg" alt="{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接" style="width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <a href="{sub_bname}" class="xcblog-blog-url">
+                    <h3>{card_date_display}→{current_random_speed}|{y_str}年最新免费节点clashnode订阅链接地址</h3>
+                    </a>
+                    <p>这一次的节点更新覆盖了新加坡、加拿大、香港、欧洲、美国、日本、韩国等地区,最高速度可达{current_random_speed}。只需复制下方的Clash/v2ray订阅链接,在客户端添加后即可正常使用。</p>
+                </div>
+            </div>\n'''
         root_cards_html += card_html
     root_cards_html += "<!-- XCBLOG_CARDS_END -->\n"
 
