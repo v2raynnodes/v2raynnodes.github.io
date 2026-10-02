@@ -7,12 +7,12 @@
 
 ### 免费Clash节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2026/10/0-20261002.yaml
+- https://node.freeclashnode.com/uploads/2026/10/2-20261002.yaml
 
  
 ### 免费V2ray节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2026/10/1-20261002.txt
+- https://node.freeclashnode.com/uploads/2026/10/2-20261002.txt
 
 ### 免费Sing-box节点订阅链接
 
