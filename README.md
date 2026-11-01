@@ -16,7 +16,7 @@
 
 ### 免费Sing-box节点订阅链接
 
-- https://node.freeclashnode.com/uploads/2026/10/20261101.json
+- https://node.freeclashnode.com/uploads/2026/11/20261101.json
 
 ## 更多节点订阅 ：
 
